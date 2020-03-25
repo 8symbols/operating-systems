@@ -1,0 +1,9 @@
+* 
+!*.*
+!*/
+
+.*
+!/.gitignore
+
+[23]/
+cmake-build-debug/

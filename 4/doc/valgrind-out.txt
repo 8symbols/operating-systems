@@ -1,0 +1,113 @@
+==18043== Memcheck, a memory error detector
+==18043== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==18043== Using Valgrind-3.15.0-608cb11914-20190413X and LibVEX; rerun with -h for copyright info
+==18043== Command: ./3
+==18043== Parent PID: 17226
+==18043== 
+--18043-- 
+--18043-- Valgrind options:
+--18043--    --leak-check=full
+--18043--    --show-leak-kinds=all
+--18043--    --track-origins=yes
+--18043--    --verbose
+--18043--    --log-file=valgrind-out.txt
+--18043-- Contents of /proc/version:
+--18043--   Linux version 5.5.11-arch1-1 (linux@archlinux) (gcc version 9.3.0 (Arch Linux 9.3.0-1)) #1 SMP PREEMPT Sun, 22 Mar 2020 16:33:15 +0000
+--18043-- 
+--18043-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand
+--18043-- Page sizes: currently 4096, max supported 4096
+--18043-- Valgrind library directory: /usr/lib/valgrind
+--18043-- Reading syms from /home/ivan/MEGA/Projects/University/6 term/Operating Systems/Labs/4/src/3
+--18043-- Reading syms from /usr/lib/ld-2.31.so
+--18043-- Reading syms from /usr/lib/valgrind/memcheck-amd64-linux
+--18043--    object doesn't have a dynamic symbol table
+--18043-- Scheduler: using generic scheduler lock implementation.
+--18043-- Reading suppressions file: /usr/lib/valgrind/default.supp
+==18043== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-18043-by-ivan-on-???
+==18043== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-18043-by-ivan-on-???
+==18043== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-18043-by-ivan-on-???
+==18043== 
+==18043== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==18043== don't want to do, unless you know exactly what you're doing,
+==18043== or are doing some strange experiment):
+==18043==   /usr/lib/valgrind/../../bin/vgdb --pid=18043 ...command...
+==18043== 
+==18043== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==18043==   /path/to/gdb ./3
+==18043== and then give GDB the following command
+==18043==   target remote | /usr/lib/valgrind/../../bin/vgdb --pid=18043
+==18043== --pid is optional if only one valgrind process is running
+==18043== 
+--18043-- REDIR: 0x40212b0 (ld-linux-x86-64.so.2:strlen) redirected to 0x580c7532 (vgPlain_amd64_linux_REDIR_FOR_strlen)
+--18043-- REDIR: 0x4021080 (ld-linux-x86-64.so.2:index) redirected to 0x580c754c (vgPlain_amd64_linux_REDIR_FOR_index)
+--18043-- Reading syms from /usr/lib/valgrind/vgpreload_core-amd64-linux.so
+--18043-- Reading syms from /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so
+==18043== WARNING: new redirection conflicts with existing -- ignoring it
+--18043--     old: 0x040212b0 (strlen              ) R-> (0000.0) 0x580c7532 vgPlain_amd64_linux_REDIR_FOR_strlen
+--18043--     new: 0x040212b0 (strlen              ) R-> (2007.0) 0x0483cda0 strlen
+--18043-- REDIR: 0x401da90 (ld-linux-x86-64.so.2:strcmp) redirected to 0x483dc90 (strcmp)
+--18043-- REDIR: 0x4021810 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4841670 (mempcpy)
+--18043-- Reading syms from /usr/lib/libc-2.31.so
+--18043-- REDIR: 0x492bc40 (libc.so.6:memmove) redirected to 0x482f1c0 (_vgnU_ifunc_wrapper)
+--18043-- REDIR: 0x492afc0 (libc.so.6:strncpy) redirected to 0x482f1c0 (_vgnU_ifunc_wrapper)
+--18043-- REDIR: 0x492bf70 (libc.so.6:strcasecmp) redirected to 0x482f1c0 (_vgnU_ifunc_wrapper)
+--18043-- REDIR: 0x492a8e0 (libc.so.6:strcat) redirected to 0x482f1c0 (_vgnU_ifunc_wrapper)
+--18043-- REDIR: 0x492b020 (libc.so.6:rindex) redirected to 0x482f1c0 (_vgnU_ifunc_wrapper)
+--18043-- REDIR: 0x492d310 (libc.so.6:rawmemchr) redirected to 0x482f1c0 (_vgnU_ifunc_wrapper)
+--18043-- REDIR: 0x49457f0 (libc.so.6:wmemchr) redirected to 0x482f1c0 (_vgnU_ifunc_wrapper)
+--18043-- REDIR: 0x4945330 (libc.so.6:wcscmp) redirected to 0x482f1c0 (_vgnU_ifunc_wrapper)
+--18043-- REDIR: 0x492bda0 (libc.so.6:mempcpy) redirected to 0x482f1c0 (_vgnU_ifunc_wrapper)
+--18043-- REDIR: 0x492bbd0 (libc.so.6:bcmp) redirected to 0x482f1c0 (_vgnU_ifunc_wrapper)
+--18043-- REDIR: 0x492af50 (libc.so.6:strncmp) redirected to 0x482f1c0 (_vgnU_ifunc_wrapper)
+--18043-- REDIR: 0x492a990 (libc.so.6:strcmp) redirected to 0x482f1c0 (_vgnU_ifunc_wrapper)
+--18043-- REDIR: 0x492bd00 (libc.so.6:memset) redirected to 0x482f1c0 (_vgnU_ifunc_wrapper)
+--18043-- REDIR: 0x49452f0 (libc.so.6:wcschr) redirected to 0x482f1c0 (_vgnU_ifunc_wrapper)
+--18043-- REDIR: 0x492aeb0 (libc.so.6:strnlen) redirected to 0x482f1c0 (_vgnU_ifunc_wrapper)
+--18043-- REDIR: 0x492aa70 (libc.so.6:strcspn) redirected to 0x482f1c0 (_vgnU_ifunc_wrapper)
+--18043-- REDIR: 0x492bfc0 (libc.so.6:strncasecmp) redirected to 0x482f1c0 (_vgnU_ifunc_wrapper)
+--18043-- REDIR: 0x492aa10 (libc.so.6:strcpy) redirected to 0x482f1c0 (_vgnU_ifunc_wrapper)
+--18043-- REDIR: 0x492c110 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x482f1c0 (_vgnU_ifunc_wrapper)
+--18043-- REDIR: 0x4946a40 (libc.so.6:wcsnlen) redirected to 0x482f1c0 (_vgnU_ifunc_wrapper)
+--18043-- REDIR: 0x4945370 (libc.so.6:wcscpy) redirected to 0x482f1c0 (_vgnU_ifunc_wrapper)
+--18043-- REDIR: 0x492b060 (libc.so.6:strpbrk) redirected to 0x482f1c0 (_vgnU_ifunc_wrapper)
+--18043-- REDIR: 0x492a940 (libc.so.6:index) redirected to 0x482f1c0 (_vgnU_ifunc_wrapper)
+--18043-- REDIR: 0x492ae70 (libc.so.6:strlen) redirected to 0x482f1c0 (_vgnU_ifunc_wrapper)
+--18043-- REDIR: 0x4931750 (libc.so.6:memrchr) redirected to 0x482f1c0 (_vgnU_ifunc_wrapper)
+--18043-- REDIR: 0x492c010 (libc.so.6:strcasecmp_l) redirected to 0x482f1c0 (_vgnU_ifunc_wrapper)
+--18043-- REDIR: 0x492bb90 (libc.so.6:memchr) redirected to 0x482f1c0 (_vgnU_ifunc_wrapper)
+--18043-- REDIR: 0x4945440 (libc.so.6:wcslen) redirected to 0x482f1c0 (_vgnU_ifunc_wrapper)
+--18043-- REDIR: 0x492b320 (libc.so.6:strspn) redirected to 0x482f1c0 (_vgnU_ifunc_wrapper)
+--18043-- REDIR: 0x492bf10 (libc.so.6:stpncpy) redirected to 0x482f1c0 (_vgnU_ifunc_wrapper)
+--18043-- REDIR: 0x492beb0 (libc.so.6:stpcpy) redirected to 0x482f1c0 (_vgnU_ifunc_wrapper)
+--18043-- REDIR: 0x492d350 (libc.so.6:strchrnul) redirected to 0x482f1c0 (_vgnU_ifunc_wrapper)
+--18043-- REDIR: 0x492c060 (libc.so.6:strncasecmp_l) redirected to 0x482f1c0 (_vgnU_ifunc_wrapper)
+--18043-- REDIR: 0x49fd000 (libc.so.6:__strrchr_avx2) redirected to 0x483c7b0 (rindex)
+==18043== Invalid read of size 4
+==18043==    at 0x10914D: main (3_null.c:5)
+==18043==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==18043== 
+==18043== 
+==18043== Process terminating with default action of signal 11 (SIGSEGV): dumping core
+==18043==  Access not within mapped region at address 0x0
+==18043==    at 0x10914D: main (3_null.c:5)
+==18043==  If you believe this happened as a result of a stack
+==18043==  overflow in your program's main thread (unlikely but
+==18043==  possible), you can try to increase the size of the
+==18043==  main thread stack using the --main-stacksize= flag.
+==18043==  The main thread stack size used in this run was 8388608.
+--18043-- REDIR: 0x4927440 (libc.so.6:free) redirected to 0x483a940 (free)
+==18043== 
+==18043== HEAP SUMMARY:
+==18043==     in use at exit: 0 bytes in 0 blocks
+==18043==   total heap usage: 0 allocs, 0 frees, 0 bytes allocated
+==18043== 
+==18043== All heap blocks were freed -- no leaks are possible
+==18043== 
+==18043== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+==18043== 
+==18043== 1 errors in context 1 of 1:
+==18043== Invalid read of size 4
+==18043==    at 0x10914D: main (3_null.c:5)
+==18043==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==18043== 
+==18043== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)

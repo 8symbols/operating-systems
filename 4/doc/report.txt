@@ -1,0 +1,114 @@
+1)  Завели в стековой памяти новый указатель new_p и с помощью malloc 
+    присвоили ему адрес в динамической памяти. Вывели этот адрес, а также
+    адрес самого указателя.
+
+    Address of main is 0x56083a054169
+    Address of global is 0x56083a05704c
+    Address of local is 0x7fff1e7bd1c4
+    Address of p is 0x56083a85a2a0
+    Address of new_p is 0x56083a85a740
+    Address of new local is 0x7fff1e7bd1c8
+
+    Отсюда видно, что на моей архитектуре и динамические, и стековые адреса 
+    задействуются в сторону возрастания.
+
+    Q: Как найти адрес указателя? Что возвращается при оценивании p и &p? 
+    A: Пусть p - некоторый указатель.
+       Тогда:
+       *p - значение переменной, хранящейся по адресу в указателе;
+        p - адрес, хранящийся в указателе;
+       &p - адрес самого указателя.
+
+
+2)  name хранится в стековой памяти, поэтому его можно изменять, 
+    name1 указывает на строку в константном сегменте, изменять которую нельзя.
+    
+    Чтобы код выполнялся и была возможность изменять данные, можно заменить 
+    объявление переменной следующим образом:
+    char name1[] = "Anna";  
+    В таком случае name1 будет представлять собой массив символов, 
+    проинициализированный строкой.
+
+
+3)  Разыменование нулевого указателя приводит к неопределенному поведению, в 
+    данном случае - к выбрасыванию исключения segmentation fault и завершению 
+    программы.
+
+
+4)  Результат работы отладчика:
+    (gdb) run
+    Starting program: /src/3 
+
+    Program received signal SIGSEGV, Segmentation fault.
+    0x000055555555514d in main () at 3_null.c:5
+    5           printf("%d\n", *p);  // Error (SIGSEGV).
+    (gdb) 
+
+    Он сообщает, что было выброшено исключение segmentation fault,
+    и указывает инструкцию, на которой это произошло.
+
+
+5)  Запустили valgrind 
+
+    valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes 
+    --verbose --log-file=valgrind-out.txt ./3
+
+    и получили файл с логами (прилагается), из которого нам интересны следующие
+    строки:
+
+    ==18043== 1 errors in context 1 of 1:
+    ==18043== Invalid read of size 4
+    ==18043==    at 0x10914D: main (3_null.c:5)
+    ==18043==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+
+    Valgrind сообщает, что ошибка произошла из-за попытки чтения по адресу,
+    к которому у нас нет доступа.
+
+
+6)  gdb не сообщает о проблеме:
+    [Inferior 1 (process 18697) exited normally]
+
+    Valgrind сообщает, что мы не очистили память и у нас произошла утечка,
+    а также показывает, сколько памяти было потеряно и где:
+    
+    ==18721== HEAP SUMMARY:
+    ==18721==     in use at exit: 128 bytes in 1 blocks
+    ==18721==   total heap usage: 1 allocs, 0 frees, 128 bytes allocated
+    ==18721== 
+    ==18721== 128 bytes in 1 blocks are definitely lost in loss record 1 of 1
+    ==18721==    at 0x483977F: malloc (vg_replace_malloc.c:309)
+    ==18721==    by 0x109146: main (6.c:4)
+    ==18721== 
+    ==18721== LEAK SUMMARY:
+    ==18721==    definitely lost: 128 bytes in 1 blocks
+    ==18721==    indirectly lost: 0 bytes in 0 blocks
+    ==18721==      possibly lost: 0 bytes in 0 blocks
+    ==18721==    still reachable: 0 bytes in 0 blocks
+    ==18721==         suppressed: 0 bytes in 0 blocks
+
+
+7)  В программе имеется ошибка: выход за границы массива. Valgrind сообщает 
+    о ней:
+
+    ==18891== Invalid write of size 4
+    ==18891==    at 0x109169: main (in /src/7)
+    ==18891==  Address 0x4a651d0 is 0 bytes after a block of size 400 alloc'd
+    ==18891==    at 0x483977F: malloc (vg_replace_malloc.c:309)
+    ==18891==    by 0x10915A: main (in /src/7)
+
+    Мы пытаемся записать значение по адресу, расположенному за выделенным 
+    блоком.
+
+
+8)  Результат работы Valgrind:
+
+    ==19183== Invalid read of size 4
+    ==19183==    at 0x109191: main (in /src/8)
+    ==19183==  Address 0x4a65068 is 40 bytes inside a block of size 400 free'd
+    ==19183==    at 0x483A9AB: free (vg_replace_malloc.c:540)
+    ==19183==    by 0x109188: main (in /src/8)
+    ==19183==  Block was alloc'd at
+    ==19183==    at 0x483977F: malloc (vg_replace_malloc.c:309)
+    ==19183==    by 0x10916A: main (in /src/8)
+
+    Он сообщает, что мы пытаемся читать данные из уже освобожденного блока.

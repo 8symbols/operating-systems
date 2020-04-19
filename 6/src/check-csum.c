@@ -32,13 +32,19 @@ int main(int argc, char *argv[]) {
         uint8_t checksum = crc_8(buff, size);
         uint8_t expected;
         if (fscanf(fp_checksums, "%c", &expected) != 1) {
-            perror("fscanf");
+            fprintf(stderr, "Error: fewer blocks were expected.\n");
             return EXIT_FAILURE;
         }
         if (checksum != expected) {
-            printf("Error: checksum %u: %c != %c\n", num, checksum, expected);
+            fprintf(stderr, "Error: checksum %u: %c != %c\n", num, checksum, expected);
         }
         ++num;
+    }
+
+    uint8_t unexpected;
+    if (fscanf(fp_checksums, "%c", &unexpected) != EOF) {
+        fprintf(stderr, "Error: more blocks were expected.\n");
+        return EXIT_FAILURE;
     }
 
     if (fclose(fp_src) != 0) {

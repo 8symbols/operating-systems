@@ -37,9 +37,9 @@ Helgrind points that there is a possible data race with using `balance` variable
 The fix is to lock each critical section:
 
 ```c
-    Pthread_mutex_lock(&lock);
-    balance++;
-    Pthread_mutex_unlock(&lock);
+Pthread_mutex_lock(&lock);
+balance++;
+Pthread_mutex_unlock(&lock);
 ```
 
 ## 3
@@ -107,7 +107,7 @@ Helgrind output:
 ==4626== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 7 from 7)
 ```
 
-Helgrind points that there is a incorrect lock order.
+Helgrind points that there is an incorrect lock order.
 
 ## 5
 

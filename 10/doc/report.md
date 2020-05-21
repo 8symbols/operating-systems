@@ -12,7 +12,7 @@ An excerpt from the `unlink()` [man page](https://www.gnu.org/software/libc/manu
 
 ## 2
 
-CPU time = (instructions / program) * (cycles / instruction) * (seconds / cycle) = 2,000,000 * 4 * (1 / 8,000,000) = 1.
+CPU time = (instructions / program) * (cycles / instruction) * (seconds / cycle) = 2,000,000 * 4 * (1 / 8,000,000) = 1 second.
 
 ## 3
 
@@ -23,9 +23,9 @@ Number of page entries = 2<sup>page number bits</sup> = 2<sup>10</sup> = 1024.
 
 Algorithm | Waiting time | Starvation | Turnaround time | Variance in turnaround time
 --- | --- | --- | --- | ---
-**First Come, First Served (FCFS).** | The average waiting time is not minimal. | Isn't possible. | Depends on the order of processes. | High.
-**Shortest Job First (SJF).** | It's optimal with respect to average waiting time if all processes are available at the same time. | Possible. | Increases if a long process starts to run before a short one enters system. | There is no variance for the same set of available processes.
-**Shortest Time-to-Completion First (STCF).** | It's optimal. | Possible. | The turnaround time of the long process is improved (relative to SJF). | There is no variance for the same set of processes.
-**Round Robin (RR).** | Even the short processes may take long time to execute. | Isn't possible. | Even worse than simple FCFS in many cases. | Depends on the size of the time quantum.
+**First Come, First Served (FCFS)** | The average waiting time is not minimal. | Isn't possible. | Depends on the order of processes. | High.
+**Shortest Job First (SJF)** | It's optimal with respect to average waiting time if all processes are available at the same time. | Possible. | Increases if a long process starts to run before a short one enters system. | There is no variance for the same set of available processes.
+**Shortest Time-to-Completion First (STCF)** | It's optimal. | Possible. | The turnaround time of the long process is improved (relative to SJF). | There is no variance for the same set of processes.
+**Round Robin (RR)** | Even the short processes may take long time to execute. | Isn't possible. | Even worse than simple FCFS in many cases. | Depends on the size of the time quantum.
 
 FCFS algorithm has a high variance in turnaround time.
